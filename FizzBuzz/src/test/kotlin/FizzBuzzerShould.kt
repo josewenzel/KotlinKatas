@@ -21,4 +21,11 @@ class FizzBuzzerShould {
 
         verify { printer.printLine("2") }
     }
+
+    @Test
+    fun `print out 4 if input is 4`() {
+        fizzBuzzer.calculate(4);
+
+        verify { printer.printLine("4") }
+    }
 }
