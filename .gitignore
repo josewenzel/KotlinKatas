@@ -1,2 +1,4 @@
-**/.idea
-**/.gradle
+.idea/
+.gradle/
+**/.gradle/
+**/.idea/
