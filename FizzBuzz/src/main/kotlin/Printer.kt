@@ -1,3 +1,3 @@
 interface Printer {
-    fun print(line: String);
+    fun printLine(line: String): Void;
 }
