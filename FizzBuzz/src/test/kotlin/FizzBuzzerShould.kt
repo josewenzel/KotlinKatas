@@ -1,31 +1,28 @@
-import io.mockk.*
 import io.mockk.junit5.MockKExtension
+import io.mockk.spyk
+import io.mockk.verify
+import org.junit.jupiter.api.DynamicTest.dynamicTest
+import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.extension.ExtendWith
-import kotlin.test.Test
 
 @ExtendWith(MockKExtension::class)
 class FizzBuzzerShould {
-    private val printer = spyk<Printer>();
-    private val fizzBuzzer = FizzBuzzer(printer);
+    private val printer = spyk<Printer>()
+    private val fizzBuzzer = FizzBuzzer(printer)
 
-    @Test
-    fun `print out 1 if input is 1`() {
-        fizzBuzzer.calculate(1);
+    private val nonSpecialCases = listOf(
+        1 to "1",
+        2 to "2",
+        4 to "4"
+    )
 
-        verify { printer.printLine("1") }
-    }
+    @TestFactory
+    fun `print out a number if input does not fall under specific rule`() =
+        nonSpecialCases.map { (input, expectedInPrinter) ->
+            dynamicTest("$input should print $expectedInPrinter") {
+                fizzBuzzer.calculate(input)
+                verify { printer.printLine(expectedInPrinter) }
+            }
+        }
 
-    @Test
-    fun `print out 2 if input is 2`() {
-        fizzBuzzer.calculate(2);
-
-        verify { printer.printLine("2") }
-    }
-
-    @Test
-    fun `print out 4 if input is 4`() {
-        fizzBuzzer.calculate(4);
-
-        verify { printer.printLine("4") }
-    }
 }
