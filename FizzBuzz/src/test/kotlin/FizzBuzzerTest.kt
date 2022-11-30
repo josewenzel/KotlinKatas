@@ -29,7 +29,7 @@ class FizzBuzzerTest {
     )
 
     @TestFactory
-    fun `calculate returns`() =
+    fun `that calculate returns`() =
         nonSpecialCases.map { (input, expectedInPrinter) ->
             dynamicTest("$expectedInPrinter if input is $input") {
                 fizzBuzzer.calculate(input)
