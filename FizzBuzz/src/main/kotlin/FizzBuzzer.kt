@@ -10,4 +10,3 @@ class FizzBuzzer(private val printer: Printer) {
 }
 
 fun Int.isDivisibleBy(value: Int): Boolean = this % value == 0
-
