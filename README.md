@@ -13,6 +13,9 @@ are:
   quality of life enhancements.
 - [MockK:](https://mockk.io/) Mocking library that supports mocking for widely used libraries. It is also really easy to
   use.
+- [KtLint:](https://pinterest.github.io/ktlint/) I'm using
+  the [KtLint plugin for intelliJ](https://plugins.jetbrains.com/plugin/15057-ktlint-unofficial-/) which is an
+  opinionated linter following the practice of "convention over configuration".
 
 ## Structure
 
