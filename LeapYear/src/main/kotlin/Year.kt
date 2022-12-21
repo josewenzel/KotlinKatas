@@ -1,5 +1,9 @@
 typealias Year = Int
 
-fun Year.isLeap() : Boolean {
-    return this % 4 == 0 && this % 100 != 0 || this % 400 == 0
+fun Int.isDivisibleBy(divisor: Int) = this % divisor == 0
+
+fun Year.isLeap(): Boolean {
+    return this.isDivisibleBy(4)
+            && !this.isDivisibleBy(100)
+            || this.isDivisibleBy(400)
 }
