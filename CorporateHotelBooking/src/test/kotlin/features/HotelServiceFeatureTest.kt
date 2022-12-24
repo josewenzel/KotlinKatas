@@ -1,5 +1,6 @@
 package features
 
+import domain.exceptions.DuplicateHotelException
 import domain.model.hotel.Hotel
 import domain.model.hotel.HotelInformation
 import domain.model.room.Room
@@ -10,6 +11,7 @@ import domain.services.HotelService
 import io.github.serpro69.kfaker.faker
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.api.expectThrows
 import strikt.assertions.isEqualTo
 
 class HotelServiceFeatureTest {
@@ -29,6 +31,13 @@ class HotelServiceFeatureTest {
         val hotelRoomsInformation = hotelService.findHotelBy(hotel.id)
 
         expectThat(hotelRoomsInformation).isEqualTo(hotel)
+    }
+
+    @Test
+    fun `notifies if the hotel to be add already exists and does not add it`() {
+        hotelService.addHotel(hotel)
+
+        expectThrows<DuplicateHotelException> { hotelService.addHotel(hotel) }
     }
 
     private fun getRandomHotel(): Hotel {

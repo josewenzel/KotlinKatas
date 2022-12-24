@@ -1,5 +1,7 @@
 package domain.services
 
+import domain.exceptions.MissingHotelException
+import domain.exceptions.DuplicateHotelException
 import domain.model.hotel.Hotel
 import domain.model.hotel.HotelInformation
 import domain.model.room.Room
@@ -9,6 +11,7 @@ import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
+import strikt.api.expectThrows
 
 class HotelServiceTest {
     private val hotel = Hotel(1, HotelInformation("Random name"))
@@ -41,5 +44,19 @@ class HotelServiceTest {
         hotelService.findHotelBy(hotel.id)
 
         verify { hotelRepository.get(hotel.id) }
+    }
+
+    @Test
+    fun `throws duplicated hotel if trying to add an existing hotel`() {
+        every { hotelRepository.get(hotel.id) } returns hotel
+
+        expectThrows<DuplicateHotelException> { hotelService.addHotel(hotel) }
+    }
+
+    @Test
+    fun `throws missing hotel if trying to add a room to a non existent hotel`() {
+        every { hotelRepository.get(hotel.id) } returns null
+
+        expectThrows<MissingHotelException> { hotelService.setRoom(hotel.id, room) }
     }
 }

@@ -15,5 +15,5 @@ class FakeHotelRepository : HotelRepository {
         store[hotelId] = hotel
     }
 
-    override fun get(hotelId: Id): Hotel = store[hotelId]!!
+    override fun get(hotelId: Id): Hotel? = store[hotelId]
 }
